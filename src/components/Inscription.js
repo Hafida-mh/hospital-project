@@ -13,9 +13,15 @@ export default function Inscription() {
     const [email, setEmail] = useState();
     const [passWord, setPassWord] = useState();
     const [passWordValidation, setPasswordValidation] = useState();
-    const [arr, setArr] = useState([]);
+    const [arr, setArr] = useState({});
+   
+  /*  const newuser = []
+arr && newuser  = {email : arr.email}
+   */ 
 
-    const handleInfo = async () => {
+
+
+ const handleInfo =  () => {
         if (email && passWord && passWordValidation) {
             setArr([{
                 email: email,
@@ -23,13 +29,17 @@ export default function Inscription() {
                 passwordValidation: passWordValidation
             }])
 
-            return  await axios.post('http://localhost:2000/user', {
+
+            return   axios.post('http://localhost:2000/user/', {
                 body : JSON.stringify(arr),
                 Headers : {
                     'Content-Type' : 'application/json'
                 }
             })
-            .then(res => res.json())
+            .then(res => res.json({
+                message : "successfully added",
+                data : arr
+            }))
             .then(res => console.log(arr))
 
          
@@ -40,8 +50,7 @@ export default function Inscription() {
 */
        /*  await  axios.post('http://localhost:2000/user/signup', arr)
          console.log(arr) */
-           
-
+      
 
         }
 else {
@@ -49,9 +58,9 @@ else {
 }
     }
     
-
+     
     useEffect(() => {
-        handleInfo();
+        handleInfo()
     }, [])
 
 
@@ -65,9 +74,10 @@ else {
                     <input type="email" placeholder="entrer adresse mail" className="emailAdress" onChange={(e) => setEmail(e.target.value)} value={email} />
                     <input type="password" placeholder="entrer mot de passe" className="passWord" onChange={(e) => setPassWord(e.target.value)} value={passWord} />
                     <input type="password" placeholder="confirmer mot de passe" className="passWordValidation" onChange={(e) => setPasswordValidation(e.target.value)} value={passWordValidation} />
-                    <button onClick={(e) => {
-                        handleInfo(e);
+                    <button onClick={() => {
+                        handleInfo();
                         console.log(arr);
+                        
                     }
                     }> Envoyer </button>
 
