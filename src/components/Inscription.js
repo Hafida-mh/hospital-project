@@ -23,24 +23,34 @@ arr && newuser  = {email : arr.email}
 
  const handleInfo =  () => {
         if (email && passWord && passWordValidation) {
+
+            let dataa = {
+                "email" : email,
+                "password" : passWord,
+                "passwordValidation" : passWordValidation
+            }
+
+            /*
             setArr([{
                 email: email,
                 password: passWord,
                 passwordValidation: passWordValidation
             }])
+*/
+ console.log(dataa); 
 
-
-            return   axios.post('http://localhost:2000/user/', {
-                body : JSON.stringify(arr),
+            return axios.post('http://localhost:2000/user/', {
+                body : JSON.stringify({dataa}),
                 Headers : {
                     'Content-Type' : 'application/json'
                 }
             })
-            .then(res => res.json({
-                message : "successfully added",
-                data : arr
-            }))
-            .then(res => console.log(arr))
+            .then(res => res.json())
+            .catch(err => {
+              console.log(err);
+            })
+         
+      
 
          
 /*
@@ -50,7 +60,7 @@ arr && newuser  = {email : arr.email}
 */
        /*  await  axios.post('http://localhost:2000/user/signup', arr)
          console.log(arr) */
-      
+     
 
         }
 else {
@@ -59,8 +69,8 @@ else {
     }
     
      
-    useEffect(() => {
-        handleInfo()
+    useEffect((e) => {
+        handleInfo(e)
     }, [])
 
 
@@ -74,9 +84,8 @@ else {
                     <input type="email" placeholder="entrer adresse mail" className="emailAdress" onChange={(e) => setEmail(e.target.value)} value={email} />
                     <input type="password" placeholder="entrer mot de passe" className="passWord" onChange={(e) => setPassWord(e.target.value)} value={passWord} />
                     <input type="password" placeholder="confirmer mot de passe" className="passWordValidation" onChange={(e) => setPasswordValidation(e.target.value)} value={passWordValidation} />
-                    <button onClick={() => {
-                        handleInfo();
-                        console.log(arr);
+                    <button onClick={(e) => {
+                        handleInfo(e);
                         
                     }
                     }> Envoyer </button>
