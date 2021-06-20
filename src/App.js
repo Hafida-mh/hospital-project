@@ -1,14 +1,15 @@
-import './App.css';
-import React from 'react'
-import Inscription from '../src/components/Inscription'
-import Connexion from './components/Connexion.js'
-
-import {
+ import './App.css';
+ import React from 'react'
+ import Inscription from '../src/components/Inscription'
+ import Connexion from './components/Connexion.js'
+ import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
-} from "react-router-dom";
+ } from "react-router-dom";
+
+import Map from './components/Map'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Switch>
           <Route exact path="/"> <Inscription /> </Route>
           <Route path="/connexion" > <Connexion /> </Route>
+          <Route path="/map"> <Map /> </Route>
         </Switch>
       </Router>
 

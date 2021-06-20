@@ -23,7 +23,7 @@ export default function Inscription() {
 
      try {
      if(email && passWord && passWordValidation) {
-        const { data } = await axios.post(`http://localhost:2000/user`, {
+        const { data } = await axios.post(`#user`, {
             userEmail : email,
             userPassword : passWord,
             userPassWordValidation : passWordValidation
